@@ -222,3 +222,38 @@ resource "google_project" "pvs-clientfinan-prod" {
   auto_create_network = false
   billing_account = "01E7B2-4AE1CA-5C9264"
 }
+
+# Criando alerta de Monitoramento de custos do projeto
+data "google_billing_account" "account" {
+  billing_account = "01E7B2-4AE1CA-5C9264"
+}
+
+data "google_project" "project" {
+}
+
+resource "google_billing_budget" "budget" {
+  billing_account = data.google_billing_account.account.id
+  display_name    = "Meu Alerta de Faturamento"
+
+  budget_filter {
+    projects = ["projects/${data.google_project.project.number}"]
+  }
+
+  amount {
+    specified_amount {
+      currency_code = "BRL"
+      units         = "10"
+    }
+  }
+
+  threshold_rules {
+    threshold_percent = 1.0
+  }
+  threshold_rules {
+    threshold_percent = 1.0
+    spend_basis       = "FORECASTED_SPEND"
+  }
+
+
+}
+
