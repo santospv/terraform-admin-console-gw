@@ -1,6 +1,6 @@
 # Terrafrom Admin-Console GCP
 
-Foi utilizando o Terraform para implementar todo o provisionamento de Usuários e Grupos de Usuários da Organização. 
+Foi utilizado o Terraform para implementar todo o provisionamento de Usuários e Grupos de Usuários da Organização. 
 
 O código também já provisiona toda a parte de estrutura de projetos e pastas da organização. 
 
